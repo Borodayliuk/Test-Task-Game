@@ -1,24 +1,52 @@
+using System;
 using Models;
 
 namespace Services.User
 {
     public class UserService : IUserService
     {
+        private readonly UserModel _userModel = new();
 
-        public UserService(UserModel userModel)
+        public int LivesAmount => _userModel.LivesAmount;
+        public DateTime LastLivesRefillTime => _userModel.LastRefillTime;
+
+        public UserService()
         {
             
         }
 
-        public void AddHearts(int amount)
+        public void SetLives(int amount)
         {
-            throw new System.NotImplementedException();
+            if (amount is < 0 or > Constants.MaxLives)
+                return;
+
+            _userModel.LivesAmount = amount;
+
+            GlobalGameEvents.LivesAmountChanged?.Invoke(_userModel.LivesAmount);
         }
 
-        public void SubtractHearts(int amount)
+        public void AddLives(int amount)
         {
-            throw new System.NotImplementedException();
+            if (_userModel.LivesAmount + amount > Constants.MaxLives)
+                return;
+
+            _userModel.LivesAmount += amount;
+
+            GlobalGameEvents.LivesAmountChanged?.Invoke(_userModel.LivesAmount);
         }
+
+        public void SubtractLives(int amount)
+        {
+            if (_userModel.LivesAmount - amount < 0)
+                return;
+
+            _userModel.LivesAmount -= amount;
+
+            GlobalGameEvents.LivesAmountChanged?.Invoke(_userModel.LivesAmount);
+        }
+
+        public void SetLastLivesRefillTime(DateTime dateTime)
+            => _userModel.LastRefillTime = dateTime;
 
         public void SavePlayerState()
         {
@@ -27,7 +55,6 @@ namespace Services.User
 
         private void LoadPlayerState(UserModel userModel)
         {
-            
         }
     }
 }

@@ -17,8 +17,16 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 7dc343df1d56d4fd58a6f9c65acf016e
   m_SerializeEntries:
-  - m_GUID: fa0a2ba3bcc1b46848de676aa04c9b94
-    m_Address: PopUpsCanvas
+  - m_GUID: c92c81dee5611406ba65fb071645be2f
+    m_Address: LivesPopUp
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 5148aae4b60fa4d4093446df62a9e09b
+    m_Address: CanvasPrefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6a042a6b5bf894b9dae6bb385f05f51b
+    m_Address: LivesWidget
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0

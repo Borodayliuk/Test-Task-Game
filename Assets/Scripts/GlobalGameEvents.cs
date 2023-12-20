@@ -1,16 +1,7 @@
-using UnityEngine;
+using System;
 
-public class GlobalGameEvents : MonoBehaviour
+public static class GlobalGameEvents
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public static Action<int> LivesAmountChanged;
+    public static Action LivesSubtracted;
 }

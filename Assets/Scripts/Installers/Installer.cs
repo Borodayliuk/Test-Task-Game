@@ -1,5 +1,7 @@
+using Services.LivesRefill;
 using Services.PopUp;
-using UnityEngine;
+using Services.User;
+using Services.Widget;
 using Zenject;
 
 namespace Installers
@@ -8,12 +10,16 @@ namespace Installers
     {
         public override void InstallBindings()
         {
-            InstallService();
+            InstallServices();
         }
 
-        private void InstallService()
+        private void InstallServices()
         {
-            Container.Bind<IPopUpService>().To<PopUpService>().AsSingle().NonLazy();
+            Container.Bind<IUserService>().To<UserService>().AsSingle();
+            Container.Bind(typeof(ITimerService), typeof(ITickable)).To<TimerService>().AsSingle();
+            Container.Bind<ILivesRefillService>().To<LivesRefillService>().AsSingle().NonLazy();
+            Container.Bind<IPopUpService>().To<PopUpService>().AsSingle();
+            Container.Bind<IWidgetService>().To<WidgetService>().AsSingle().NonLazy();
         }
     }
 }

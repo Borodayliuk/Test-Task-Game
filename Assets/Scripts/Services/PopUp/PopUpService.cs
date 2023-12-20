@@ -2,23 +2,25 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using Zenject;
 
 namespace Services.PopUp
 {
     public class PopUpService : IPopUpService
     {
-        private const string PopUpsCanvasKey = "PopUpsCanvas";
+        private const string CanvasKey = "CanvasPrefab";
 
+        private readonly DiContainer _container;
         private readonly Dictionary<string, IPopUp> _popUps = new ();
 
         private GameObject _popUpsCanvasInstance;
 
-        public PopUpService()
+        public PopUpService(DiContainer container)
         {
-            InstantiatePopUpsCanvas();
+            _container = container;
         }
 
-        public async UniTask<IPopUp> Open<T>(PopUpModel popUpModel) where T : IPopUp, new()
+        public async UniTask<IPopUp> Open<T>() where T : IPopUp, new()
         {
             if (_popUpsCanvasInstance == null)
                 await InstantiatePopUpsCanvas();
@@ -34,6 +36,8 @@ namespace Services.PopUp
 
             var popUpInstance = await InstantiatePopUp(popUpKey);
 
+            _container.Inject(popUp);
+
             await InitPopup(popUp, popUpInstance);
             await popUp.Open();
             return popUp;
@@ -42,7 +46,7 @@ namespace Services.PopUp
         private async UniTask<GameObject> InstantiatePopUp(string popUpKey)
         {
             var prefab = await Addressables.LoadAssetAsync<GameObject>(popUpKey);
-            return Object.Instantiate(prefab, _popUpsCanvasInstance.transform);
+            return _container.InstantiatePrefab(prefab, _popUpsCanvasInstance.transform);
         }
 
         private async UniTask InitPopup(IPopUp popUp, GameObject popUpInstance)
@@ -54,8 +58,8 @@ namespace Services.PopUp
 
         private async UniTask InstantiatePopUpsCanvas()
         {
-            var prefab = await Addressables.LoadAssetAsync<GameObject>(PopUpsCanvasKey);
-            _popUpsCanvasInstance = Object.Instantiate(prefab);
+            var prefab = await Addressables.LoadAssetAsync<GameObject>(CanvasKey);
+            _popUpsCanvasInstance = _container.InstantiatePrefab(prefab);
 
             Object.DontDestroyOnLoad(_popUpsCanvasInstance);
         }
