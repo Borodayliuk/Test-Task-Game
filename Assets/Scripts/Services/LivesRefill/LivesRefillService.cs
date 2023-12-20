@@ -8,8 +8,6 @@ namespace Services.LivesRefill
         private readonly ITimerService _timerService;
         private readonly IUserService _userService;
 
-        private DateTime _lastRefillTime;
-
         public LivesRefillService(
             IUserService userService,
             ITimerService timerService)
@@ -49,7 +47,7 @@ namespace Services.LivesRefill
                 return;
             }
 
-            var secondsHasPassed = (int)(DateTime.Now - _lastRefillTime).TotalSeconds;
+            var secondsHasPassed = (int)(DateTime.Now - _userService.LastLivesRefillTime).TotalSeconds;
             var numberOfMissingLives = Constants.MaxLives - _userService.LivesAmount;
 
             var amountLivesToRefill = secondsHasPassed / Constants.LivesRefillTime;
@@ -69,8 +67,8 @@ namespace Services.LivesRefill
             if (IsFullLives() || _timerService.IsTimerOn)
                 return;
 
-            _userService.SetLastLivesRefillTime(DateTime.Now);
             _timerService.Start(timeLeft);
+            _userService.SetLastLivesRefillTime(DateTime.Now);
             _timerService.OnComplete += OnTimerServiceComplete;
         }
 
