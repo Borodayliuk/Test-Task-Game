@@ -20,7 +20,6 @@ namespace Services.User
 
         public UserService()
         {
-            //ClearPlayerPref();
             LoadPlayerState();
         }
 

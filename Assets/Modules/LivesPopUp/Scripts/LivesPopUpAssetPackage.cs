@@ -46,7 +46,6 @@ namespace Modules.LivesPopUp.Scripts
 
         public override async UniTask Open()
         {
-            livesPopUpAnimation.gameObject.SetActive(true);
             await livesPopUpAnimation.ShowAnimation();
             SubscribeEvents();
         }

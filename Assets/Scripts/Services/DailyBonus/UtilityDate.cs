@@ -6,39 +6,50 @@ namespace Services.DailyBonus
     {
         public static int GetDayInSeason(DateTime date)
         {
-            const int februaryNumber = 2;
-            const int decemberNumber = 12;
-            const int springDays = 92;
-            const int summerDays = 92;
-            const int winterDays = 62;
-            const int decemberDays = 31;
+            var season = GetSeason(date);
+            var months = GetMonthsBySeason(season);
 
-            var month = date.Month;
-            var day = date.Day;
-            var year = date.Year;
-            var daysInFebruary = DateTime.DaysInMonth(year, februaryNumber);
-            var originalDay = decemberDays + day;
+            var elapsedDays = 0;
+            foreach (var monthIndex in months)
+            {
+                if (monthIndex == date.Month)
+                {
+                    elapsedDays += date.Day;
+                    break;
+                }
 
-            if (month == decemberNumber)
-                return day;
+                elapsedDays += DateTime.DaysInMonth(date.Year, monthIndex);
+            }
 
-            for (var i = 1; i < month; i++)
-                originalDay += DateTime.DaysInMonth(year, i);
+            return elapsedDays;
+        }
 
-            var winterOriginalDays = daysInFebruary + winterDays;
-            var springOriginalDays = winterOriginalDays + springDays;
-            var summerOriginalDays = springOriginalDays + summerDays;
+        private static Season GetSeason(DateTime date) =>
+            date switch
+            {
+                _ when date.Month is 12 or 1 or 2 => Season.Winter,
+                _ when date.Month is 3 or 4 or 5 => Season.Spring,
+                _ when date.Month is 6 or 7 or 8 => Season.Summer,
+                _ when date.Month is 9 or 10 or 11 => Season.Autumn,
+                _ => Season.Autumn
+            };
 
-            if (originalDay <= winterOriginalDays)
-                return originalDay;
+        private static int[] GetMonthsBySeason(Season season) =>
+            season switch
+            {
+                Season.Winter => new[] { 12, 1, 2 },
+                Season.Spring => new[] { 3, 4, 5 },
+                Season.Summer => new[] { 6, 7, 8 },
+                Season.Autumn => new[] { 9, 10, 11 },
+                _ => Array.Empty<int>()
+            };
 
-            if (originalDay <= springOriginalDays)
-                return originalDay - winterOriginalDays;
-
-            if (originalDay <= summerOriginalDays)
-                return originalDay - springOriginalDays;
-
-            return originalDay - summerOriginalDays;
+        enum Season
+        {
+            Winter = 0,
+            Spring = 1,
+            Summer = 2,
+            Autumn = 3
         }
     }
 }
