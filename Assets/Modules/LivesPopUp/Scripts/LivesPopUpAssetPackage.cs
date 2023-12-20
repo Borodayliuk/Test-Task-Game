@@ -10,6 +10,8 @@ namespace Modules.LivesPopUp.Scripts
 {
     public class LivesPopUpAssetPackage : PopupAssetPackage
     {
+        public Action CloseButtonClicked;
+
         [SerializeField] private LivesPopUpAnimation livesPopUpAnimation;
         [SerializeField] private Button closeButton;
         [SerializeField] private Button closeArea;

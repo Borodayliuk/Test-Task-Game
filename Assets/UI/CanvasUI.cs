@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace Modules.PopUps.Scripts
+namespace UI
 {
-    public class PopUpsCanvas : MonoBehaviour
+    public class CanvasUI : MonoBehaviour
     {
         [SerializeField] private Canvas canvas;
 

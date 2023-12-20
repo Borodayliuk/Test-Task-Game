@@ -20,7 +20,7 @@ namespace Services.PopUp
             _container = container;
         }
 
-        public async UniTask<IPopUp> Open<T>() where T : IPopUp, new()
+        public async UniTask<IPopUp> Open<T>(PopUpModel popUpModel) where T : IPopUp, new()
         {
             if (_popUpsCanvasInstance == null)
                 await InstantiatePopUpsCanvas();
@@ -38,7 +38,7 @@ namespace Services.PopUp
 
             _container.Inject(popUp);
 
-            await InitPopup(popUp, popUpInstance);
+            await InitPopup(popUp, popUpInstance, popUpModel);
             await popUp.Open();
             return popUp;
         }
@@ -49,9 +49,9 @@ namespace Services.PopUp
             return _container.InstantiatePrefab(prefab, _popUpsCanvasInstance.transform);
         }
 
-        private async UniTask InitPopup(IPopUp popUp, GameObject popUpInstance)
+        private async UniTask InitPopup(IPopUp popUp, GameObject popUpInstance, PopUpModel popUpModel)
         {
-            await popUp.Init(popUpInstance);
+            await popUp.Init(popUpInstance, popUpModel);
 
             _popUps.Add(popUp.PopUpKey, popUp);
         }

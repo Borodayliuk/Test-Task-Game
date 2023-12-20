@@ -29,6 +29,10 @@ MonoBehaviour:
     m_Address: LivesWidget
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 42e04b96e973c416d81b1dfa8f59c075
+    m_Address: DailyBonusPopUp
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 86f5f8546c5494414b94d4cff9941b97, type: 2}
   m_SchemaSet:

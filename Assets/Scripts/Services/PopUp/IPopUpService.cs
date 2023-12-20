@@ -4,6 +4,6 @@ namespace Services.PopUp
 {
     public interface IPopUpService
     {
-        UniTask<IPopUp> Open<T>() where T : IPopUp, new();
+        UniTask<IPopUp> Open<T>(PopUpModel popUpModel = null) where T : IPopUp, new();
     }
 }

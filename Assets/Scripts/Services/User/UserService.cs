@@ -1,8 +1,8 @@
 using System;
-using Models;
 using ModestTree;
 using Newtonsoft.Json;
 using UnityEngine;
+using UserData;
 
 namespace Services.User
 {
@@ -10,10 +10,13 @@ namespace Services.User
     {
         private const string UserModelKey = "UserModel";
 
+        public event Action<int> LivesAmountChanged;
+
         private UserModel _userModel;
 
         public int LivesAmount => _userModel.LivesAmount;
         public DateTime LastLivesRefillTime => _userModel.LastRefillTime;
+        public DateTime LastDailyBonusReceivedTime => _userModel.LastDailyBonusReceivedTime;
 
         public UserService()
         {
@@ -28,7 +31,7 @@ namespace Services.User
 
             _userModel.LivesAmount = amount;
 
-            GlobalGameEvents.LivesAmountChanged?.Invoke(_userModel.LivesAmount);
+            LivesAmountChanged?.Invoke(_userModel.LivesAmount);
             SavePlayerState();
         }
 
@@ -38,7 +41,7 @@ namespace Services.User
                 return;
 
             _userModel.LivesAmount += amount;
-            GlobalGameEvents.LivesAmountChanged?.Invoke(_userModel.LivesAmount);
+            LivesAmountChanged?.Invoke(_userModel.LivesAmount);
             SavePlayerState();
         }
 
@@ -48,7 +51,7 @@ namespace Services.User
                 return;
 
             _userModel.LivesAmount -= amount;
-            GlobalGameEvents.LivesAmountChanged?.Invoke(_userModel.LivesAmount);
+            LivesAmountChanged?.Invoke(_userModel.LivesAmount);
             SavePlayerState();
         }
 
@@ -58,7 +61,13 @@ namespace Services.User
             SavePlayerState();
         }
 
-        public void SavePlayerState()
+        public void SetLastDailyBonusReceivedTime(DateTime dateTime)
+        {
+            _userModel.LastDailyBonusReceivedTime = dateTime;
+            SavePlayerState();
+        }
+
+        private void SavePlayerState()
         {
             var modelData = JsonConvert.SerializeObject(_userModel);
             PlayerPrefs.SetString(UserModelKey, modelData);

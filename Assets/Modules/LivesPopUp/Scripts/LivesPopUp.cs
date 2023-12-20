@@ -26,7 +26,7 @@ namespace Modules.LivesPopUp.Scripts
             _refillService = refillService;
         }
 
-        public UniTask Init(GameObject popUpInstance)
+        public UniTask Init(GameObject popUpInstance, PopUpModel popUpModel)
         {
             _assetPackage = popUpInstance.GetComponent<LivesPopUpAssetPackage>();
             _assetPackage.Init();
@@ -68,13 +68,13 @@ namespace Modules.LivesPopUp.Scripts
         private void SubscribeEvents()
         {
             _assetPackage.CloseButtonClicked += OnCloseClicked;
-            GlobalGameEvents.LivesAmountChanged += OnLivesAmountChanged;
+            _userService.LivesAmountChanged += OnLivesAmountChanged;
         }
 
         private void UnsubscribeEvents()
         {
             _assetPackage.CloseButtonClicked -= OnCloseClicked;
-            GlobalGameEvents.LivesAmountChanged -= OnLivesAmountChanged;
+            _userService.LivesAmountChanged -= OnLivesAmountChanged;
         }
 
         private void OnCloseClicked()

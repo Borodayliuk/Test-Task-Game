@@ -55,13 +55,13 @@ namespace Modules.Widget.Scripts
         private void SubscribeEvents()
         {
             _livesWidgetView.ButtonClicked += OnWidgetClicked;
-            GlobalGameEvents.LivesAmountChanged += OnLivesAmountChanged;
+            _userService.LivesAmountChanged += OnLivesAmountChanged;
         }
 
         private void UnsubscribeEvents()
         {
             _livesWidgetView.ButtonClicked -= OnWidgetClicked;
-            GlobalGameEvents.LivesAmountChanged -= OnLivesAmountChanged;
+            _userService.LivesAmountChanged -= OnLivesAmountChanged;
         }
 
         private void OnWidgetClicked()

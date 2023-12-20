@@ -26,14 +26,14 @@ namespace Services.LivesRefill
 
         public void Dispose()
         {
-            GlobalGameEvents.LivesAmountChanged -= OnLivesAmountChanged;
+            _userService.LivesAmountChanged -= OnLivesAmountChanged;
         }
 
         private void StartRefillLives()
         {
             RefillLivesInternal();
 
-            GlobalGameEvents.LivesAmountChanged += OnLivesAmountChanged;
+            _userService.LivesAmountChanged += OnLivesAmountChanged;
         }
 
         private void RefillLivesInternal()

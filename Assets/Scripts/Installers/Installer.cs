@@ -1,3 +1,4 @@
+using Services.DailyBonus;
 using Services.LivesRefill;
 using Services.PopUp;
 using Services.User;
@@ -19,6 +20,7 @@ namespace Installers
             Container.Bind(typeof(ITimerService), typeof(ITickable)).To<TimerService>().AsSingle();
             Container.Bind<ILivesRefillService>().To<LivesRefillService>().AsSingle().NonLazy();
             Container.Bind<IPopUpService>().To<PopUpService>().AsSingle();
+            Container.Bind<IDailyBonusService>().To<DailyBonusService>().AsSingle().NonLazy();
             Container.Bind<IWidgetService>().To<WidgetService>().AsSingle().NonLazy();
         }
     }
