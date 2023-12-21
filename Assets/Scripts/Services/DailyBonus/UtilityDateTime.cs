@@ -27,10 +27,10 @@ namespace Services.DailyBonus
         private static Season GetSeason(DateTime date) =>
             date switch
             {
-                _ when date.Month is 12 or 1 or 2 => Season.Winter,
-                _ when date.Month is 3 or 4 or 5 => Season.Spring,
-                _ when date.Month is 6 or 7 or 8 => Season.Summer,
-                _ when date.Month is 9 or 10 or 11 => Season.Autumn,
+                _ when date.Month == 12 || date.Month == 1 || date.Month == 2 => Season.Winter,
+                _ when date.Month == 3 || date.Month == 4 || date.Month == 5 => Season.Spring,
+                _ when date.Month == 6 || date.Month == 7 || date.Month == 8 => Season.Summer,
+                _ when date.Month == 9 || date.Month == 10 || date.Month == 11 => Season.Autumn,
                 _ => Season.Autumn
             };
 

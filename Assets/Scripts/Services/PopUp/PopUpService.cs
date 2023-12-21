@@ -11,7 +11,7 @@ namespace Services.PopUp
         private const string CanvasKey = "CanvasPrefab";
 
         private readonly DiContainer _container;
-        private readonly Dictionary<string, IPopUp> _popUps = new ();
+        private readonly Dictionary<string, IPopUp> _popUps = new Dictionary<string, IPopUp>();
 
         private GameObject _popUpsCanvasInstance;
 
@@ -25,7 +25,7 @@ namespace Services.PopUp
             if (_popUpsCanvasInstance == null)
                 await InstantiatePopUpsCanvas();
 
-            T popUp = new ();
+            var popUp = new T();
             var popUpKey = popUp.PopUpKey;
 
             if (_popUps.TryGetValue(popUpKey, out var existingPopUp))

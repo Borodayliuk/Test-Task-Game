@@ -25,7 +25,7 @@ namespace Services.User
 
         public void SetLives(int amount)
         {
-            if (amount is < 0 or > Constants.MaxLives)
+            if (amount < 0 || amount > Constants.MaxLives)
                 return;
 
             _userModel.LivesAmount = amount;
