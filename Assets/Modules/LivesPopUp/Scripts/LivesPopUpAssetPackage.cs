@@ -87,12 +87,6 @@ namespace Modules.LivesPopUp.Scripts
             StartCoroutine(_timerTextRefreshingRoutine);
         }
 
-        private void HideAllContent()
-        {
-            foreach (var content in _contentDictionary.Values)
-                content.gameObject.SetActive(false);
-        }
-
         private void SubscribeEvents()
         {
             closeButton.onClick.AddListener(OnCloseClicked);
@@ -103,6 +97,12 @@ namespace Modules.LivesPopUp.Scripts
         {
             closeButton.onClick.RemoveListener(OnCloseClicked);
             closeArea.onClick.RemoveListener(OnCloseClicked);
+        }
+
+        private void HideAllContent()
+        {
+            foreach (var content in _contentDictionary.Values)
+                content.gameObject.SetActive(false);
         }
 
         private void OnCloseClicked()

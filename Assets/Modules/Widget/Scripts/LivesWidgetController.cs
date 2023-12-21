@@ -10,12 +10,12 @@ namespace Modules.Widget.Scripts
 {
     public class LivesWidgetController : ILivesWidgetController, IDisposable
     {
-        public string WidgetKey => "LivesWidget";
-
         private LivesWidgetView _livesWidgetView;
         private IUserService _userService;
         private IPopUpService _popUpService;
         private ILivesRefillService _refillService;
+
+        public string WidgetKey => "LivesWidget";
 
         [Inject]
         public void Construct(

@@ -6,9 +6,9 @@ namespace Modules.DailyBonusPopUp.Scripts
 {
     public class DailyBonusPopUp : IPopUp
     {
-        public string PopUpKey => nameof(DailyBonusPopUp);
-
         private DailyBonusAssetPackage _dailyBonusAssetPackage;
+
+        public string PopUpKey => nameof(DailyBonusPopUp);
 
         public UniTask Init(GameObject popUpInstance, PopUpModel popUpModel)
         {

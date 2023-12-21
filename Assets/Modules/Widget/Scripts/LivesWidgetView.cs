@@ -53,9 +53,7 @@ namespace Modules.Widget.Scripts
         }
 
         private void OnButtonClicked()
-        {
-            ButtonClicked?.Invoke();
-        }
+            => ButtonClicked?.Invoke();
 
         private IEnumerator TimerLabelRefreshingRoutine(Func<string> timeLeftTextGetter, float refreshRateInSeconds = 0.1f)
         {

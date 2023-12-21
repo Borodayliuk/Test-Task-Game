@@ -3,7 +3,7 @@ using Services.User;
 
 namespace Services.LivesRefill
 {
-    public class LivesRefillService : ILivesRefillService, IDisposable
+    public class LivesRefillService : ILivesRefillService
     {
         private readonly ITimerService _timerService;
         private readonly IUserService _userService;
@@ -22,11 +22,6 @@ namespace Services.LivesRefill
         {
             var timeSpan = TimeSpan.FromSeconds(_timerService.TimeLeft);
             return $"{timeSpan.Minutes:D2}:{timeSpan.Seconds:D2}";
-        }
-
-        public void Dispose()
-        {
-            _userService.LivesAmountChanged -= OnLivesAmountChanged;
         }
 
         private void StartRefillLives()

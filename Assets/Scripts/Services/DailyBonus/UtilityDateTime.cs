@@ -44,7 +44,7 @@ namespace Services.DailyBonus
                 _ => Array.Empty<int>()
             };
 
-        enum Season
+        private enum Season
         {
             Winter = 0,
             Spring = 1,

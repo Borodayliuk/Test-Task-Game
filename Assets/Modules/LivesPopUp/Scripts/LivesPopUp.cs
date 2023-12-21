@@ -9,13 +9,13 @@ namespace Modules.LivesPopUp.Scripts
 {
     public class LivesPopUp : IPopUp
     {
-        public string PopUpKey => nameof(LivesPopUp);
-
         private LivesPopUpAssetPackage _assetPackage;
         private LivesPopUpContentType _actualContentType;
         private LivesPopUpContent _actualPopUpContent;
         private IUserService _userService;
         private ILivesRefillService _refillService;
+
+        public string PopUpKey => nameof(LivesPopUp);
 
         [Inject]
         public void Construct(

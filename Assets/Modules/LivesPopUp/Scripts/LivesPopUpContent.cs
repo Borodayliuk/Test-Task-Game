@@ -27,18 +27,6 @@ namespace Modules.LivesPopUp.Scripts
             UnsubscribeEvents();
         }
 
-        public void SetLivesCountText(string text)
-            => livesCountText.text = text;
-
-        public void SetTimerText(string text)
-            => timerText.text = text;
-
-        private void OnRefillClicked()
-            => RefillButtonClicked?.Invoke();
-
-        private void OnUseLifeClicked()
-            => UseLifeButtonClicked?.Invoke();
-
         private void SubscribeEvents()
         {
             useLifeButton.onClick.AddListener(OnUseLifeClicked);
@@ -50,5 +38,17 @@ namespace Modules.LivesPopUp.Scripts
             useLifeButton.onClick.RemoveListener(OnUseLifeClicked);
             refillButton.onClick.RemoveListener(OnRefillClicked);
         }
+
+        public void SetLivesCountText(string text)
+            => livesCountText.text = text;
+
+        public void SetTimerText(string text)
+            => timerText.text = text;
+
+        private void OnRefillClicked()
+            => RefillButtonClicked?.Invoke();
+
+        private void OnUseLifeClicked()
+            => UseLifeButtonClicked?.Invoke();
     }
 }

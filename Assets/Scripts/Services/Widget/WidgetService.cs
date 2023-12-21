@@ -37,6 +37,7 @@ namespace Services.Widget
         private async UniTask<GameObject> InstantiateWidget(string widgetKey)
         {
             var prefab = await Addressables.LoadAssetAsync<GameObject>(widgetKey);
+
             return _container.InstantiatePrefab(prefab, _widgetCanvasInstance.transform);
         }
 
