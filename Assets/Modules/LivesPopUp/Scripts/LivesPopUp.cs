@@ -39,6 +39,7 @@ namespace Modules.LivesPopUp.Scripts
             _actualContentType = GetPopUpContentType(_userService.LivesAmount);
             _actualPopUpContent = _assetPackage.ChangeContent(_actualContentType);
 
+            _actualPopUpContent.SetLivesCountText(_userService.LivesAmount.ToString());
             await _assetPackage.Open();
             _assetPackage.SetTimerTextGetter(() => _refillService.GetTimeUntilNextRefill());
 

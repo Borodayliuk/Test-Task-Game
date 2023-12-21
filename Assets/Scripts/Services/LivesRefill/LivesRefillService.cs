@@ -54,16 +54,19 @@ namespace Services.LivesRefill
             _userService.AddLives(amountLivesToRefill);
 
             if (!IsFullLives())
-                StartRefillTimer(remainingTime);
+                StartRefillTimer(remainingTime, updateLastRefillTime: false);
         }
 
-        private void StartRefillTimer(float timeLeft = Constants.LivesRefillTime)
+        private void StartRefillTimer(float timeLeft = Constants.LivesRefillTime, bool updateLastRefillTime = true)
         {
             if (IsFullLives() || _timerService.IsTimerOn)
                 return;
 
             _timerService.Start(timeLeft);
-            _userService.SetLastLivesRefillTime(DateTime.Now);
+
+            if (updateLastRefillTime)
+                _userService.SetLastLivesRefillTime(DateTime.Now);
+            
             _timerService.OnComplete += OnTimerServiceComplete;
         }
 
