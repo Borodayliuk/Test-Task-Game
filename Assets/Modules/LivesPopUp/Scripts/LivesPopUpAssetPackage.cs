@@ -13,11 +13,11 @@ namespace Modules.LivesPopUp.Scripts
         public Action CloseButtonClicked;
 
         [SerializeField] private LivesPopUpAnimation livesPopUpAnimation;
+        [SerializeField] private LivesPopUpContent contentFull;
+        [SerializeField] private LivesPopUpContent contentNotFull;
+        [SerializeField] private LivesPopUpContent contentEmpty;
         [SerializeField] private Button closeButton;
         [SerializeField] private Button closeArea;
-        [SerializeField] private LivesPopUpContent contentsFull;
-        [SerializeField] private LivesPopUpContent contentsNotFull;
-        [SerializeField] private LivesPopUpContent contentsEmpty;
 
         private Dictionary<LivesPopUpContentType, LivesPopUpContent> _contentDictionary;
         private LivesPopUpContent _actualContent;
@@ -36,9 +36,9 @@ namespace Modules.LivesPopUp.Scripts
 
             _contentDictionary = new Dictionary<LivesPopUpContentType, LivesPopUpContent>
             {
-                [LivesPopUpContentType.Full] = contentsFull,
-                [LivesPopUpContentType.NotFull] = contentsNotFull,
-                [LivesPopUpContentType.Empty] = contentsEmpty,
+                [LivesPopUpContentType.Full] = contentFull,
+                [LivesPopUpContentType.NotFull] = contentNotFull,
+                [LivesPopUpContentType.Empty] = contentEmpty,
             };
 
             return UniTask.CompletedTask;
@@ -117,6 +117,7 @@ namespace Modules.LivesPopUp.Scripts
                 yield return null;
             
             _isTimerTextRefreshing = true;
+
             while (_isTimerTextRefreshing)
             {
                 foreach (var content in _contentDictionary.Values)

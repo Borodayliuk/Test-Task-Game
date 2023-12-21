@@ -1,5 +1,6 @@
 using System;
 using Services.User;
+using UnityEngine;
 
 namespace Services.LivesRefill
 {
@@ -21,6 +22,7 @@ namespace Services.LivesRefill
         public string GetTimeUntilNextRefill()
         {
             var timeSpan = TimeSpan.FromSeconds(_timerService.TimeLeft);
+            Debug.Log(Constants.LivesRefillTime - (DateTime.Now - _userService.LastLivesRefillTime).Seconds % 30);
             return $"{timeSpan.Minutes:D2}:{timeSpan.Seconds:D2}";
         }
 
@@ -51,7 +53,9 @@ namespace Services.LivesRefill
             var numberOfMissingLives = Constants.MaxLives - _userService.LivesAmount;
 
             var amountLivesToRefill = secondsHasPassed / Constants.LivesRefillTime;
-            var remainingTime = secondsHasPassed % Constants.LivesRefillTime;
+            var remainingTime = Constants.LivesRefillTime - secondsHasPassed % Constants.LivesRefillTime;
+
+            Debug.Log(secondsHasPassed);
 
             if (amountLivesToRefill > numberOfMissingLives)
                 amountLivesToRefill = numberOfMissingLives;

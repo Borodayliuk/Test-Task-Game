@@ -22,7 +22,7 @@ namespace Modules.DailyBonusPopUp.Scripts
         public UniTask Open()
         {
             _dailyBonusAssetPackage.Open();
-            _dailyBonusAssetPackage.OnClaimButtonClicked += OnClaimButtonClicked;
+            _dailyBonusAssetPackage.ClaimButtonClicked += OnClaimButtonClicked;
 
             return UniTask.CompletedTask;
         }
@@ -30,7 +30,7 @@ namespace Modules.DailyBonusPopUp.Scripts
         public UniTask Close()
         {
             _dailyBonusAssetPackage.Close();
-            _dailyBonusAssetPackage.OnClaimButtonClicked += OnClaimButtonClicked;
+            _dailyBonusAssetPackage.ClaimButtonClicked += OnClaimButtonClicked;
 
             return UniTask.CompletedTask;
         }

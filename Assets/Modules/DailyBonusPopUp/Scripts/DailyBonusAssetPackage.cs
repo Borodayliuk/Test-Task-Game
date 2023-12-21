@@ -9,7 +9,7 @@ namespace Modules.DailyBonusPopUp.Scripts
 {
     public class DailyBonusAssetPackage : PopupAssetPackage
     {
-        public Action OnClaimButtonClicked;
+        public Action ClaimButtonClicked;
 
         [SerializeField] private Button claimButton;
         [SerializeField] private TextMeshProUGUI bonusText;
@@ -41,6 +41,6 @@ namespace Modules.DailyBonusPopUp.Scripts
             => bonusText.text = text;
 
         private void ClaimClicked()
-            => OnClaimButtonClicked?.Invoke();
+            => ClaimButtonClicked?.Invoke();
     }
 }

@@ -38,7 +38,7 @@ namespace Services.DailyBonus
 
         private int GetBonusAmount()
         {
-            var dayInSeason = UtilityDate.GetDayInSeason(DateTime.Now);
+            var dayInSeason = UtilityDateTime.GetDayInSeason(DateTime.Now);
             return CalculateCoins(dayInSeason);
         }
 

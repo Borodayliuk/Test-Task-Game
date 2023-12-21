@@ -25,7 +25,7 @@ namespace Modules.LivesPopUp.Scripts
             popUpBodyRectTransform.position = new Vector3(startAnimationPositionX, _showPosition.y, _showPosition.z);
 
             gameObject.SetActive(true);
-            popUpBodyRectTransform.DOMoveX(_showPosition.x, animationDelay);
+            popUpBodyRectTransform.DOMoveX(_showPosition.x, animationDelay).SetEase(Ease.Linear);
             await backgroundImage.DOFade(fadeValue, animationDelay).AsyncWaitForCompletion();
         }
 

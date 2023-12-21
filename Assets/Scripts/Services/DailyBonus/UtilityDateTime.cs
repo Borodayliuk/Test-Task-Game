@@ -2,7 +2,7 @@ using System;
 
 namespace Services.DailyBonus
 {
-    public static class UtilityDate
+    public static class UtilityDateTime
     {
         public static int GetDayInSeason(DateTime date)
         {

@@ -1001,9 +1001,9 @@ MonoBehaviour:
   livesPopUpAnimation: {fileID: 2225255750243575073}
   closeButton: {fileID: 4228188436585785704}
   closeArea: {fileID: 1717618512968451276}
-  contentsFull: {fileID: 8225701854717860495}
-  contentsNotFull: {fileID: 5216815577201224025}
-  contentsEmpty: {fileID: 8241528612031252968}
+  contentFull: {fileID: 8225701854717860495}
+  contentNotFull: {fileID: 5216815577201224025}
+  contentEmpty: {fileID: 8241528612031252968}
 --- !u!114 &2225255750243575073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1018,7 +1018,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   backgroundImage: {fileID: 1278688640902772753}
   popUpBodyRectTransform: {fileID: 1723145635521487759}
-  animationDelay: 0.8
+  animationDelay: 0.85
   startAnimationPositionX: -20
   fadeValue: 0.5
 --- !u!114 &3710435704635759042
